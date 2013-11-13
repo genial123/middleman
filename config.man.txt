@@ -1,0 +1,261 @@
+/*
+ * --------------------
+ * Application settings
+ * --------------------
+ */
+
+"app": {
+	"forever": true,
+		(boolean)
+		Puts the application in an endless loop, reviving it from the dead if it crashes.
+		Let's face it, it's gonna crash - should be used in production, not in development.
+		Will be ignored when running in a Windows-environment.
+
+	"logColors": true,
+		(boolean)
+		Use colored loglevels in the log-files. Loglevels will always appear colored in
+		console, regardless of this setting.
+
+	"ircDebugging": false,
+		(boolean)
+		Show raw output from the IRC-module in console. Raw messages from the IRC-module
+		will never appear in logfiles, regardless of this setting.
+
+	"cleanLogs": 10,
+		(integer)
+		How old, in days, a logfile gets to age before getting purged. Purge occurs
+		every 24 hours, the first purge being 24 hours after application startup.
+},
+
+
+/*
+ * ------------
+ * PTP settings
+ * ------------
+ */
+
+"ptp": {
+	"username": "my_username",
+		(string)
+		Username on PTP
+
+	"password": "my_password",
+		(string)
+		Password on PTP
+
+	"passkey": "my_passkey",
+		(string)
+		Passkey on PTP
+
+	"irckey": "my_irckey",
+		(string)
+		IRC-key on PTP
+
+
+	/*
+	 * Antitrump module settings
+	 */
+	"antitrump": {
+		"enabled": false
+			(boolean)
+			Enables this module.
+
+		"interval": 10,
+			(integer)
+			The interval, in minutes, to check for deleted snatches.
+
+		"maxage": 86400,
+			(integer)
+			The maximum age, in seconds, of a torrent before it is considered too old.
+
+		"maxtrumps": 3,
+			(integer)
+			The maximum amount a movie can be re-added before being ignored.
+
+		"testmode": false
+			(boolean)
+			If enabled, no final commands will be sent to CouchPotato.
+	},
+
+	/*
+	 * IRC-watch module settings
+	 */
+	"ircwatch": {
+		"enabled": false,
+			(boolean)
+			Enables this module.
+
+		"maxage": 1,
+			(integer)
+			Maximum age, in years, for an announce to be picked up and checked. If you
+			only use CouchPotato for new movies, it's unnecessary to process announces
+			for old releases. Does not apply to freeleech-torrents when freeleech-mode
+			is enabled.
+
+		"server": "irc.passthepopcorn.me",
+			(string)
+			IRC hostname.
+
+		"port": 6667,
+			(integer)
+			IRC port.
+
+		"secure": false,
+			(boolean)
+			Use TLS when connecting to IRC. Needs to be true if you're using the IRC
+			SSL-port.
+
+		"nickname": "my_botnick",
+			(string)
+			IRC nickname. This also needs to be the NickServ-username.
+
+		"channel": "#ptp-announce",
+			(string)
+			IRC channel to listen for announces. Don't change this.
+
+		"nickservPassword": "my_password",
+			(string)
+			NickServ password.
+
+		"masterAuths": [""],
+			(array)
+			Whitelist of NickServ-auths who are allowed to execute commands on the bot.
+			ex: ["myMaster"]					NickServ-auth "myMaster" is whitelisted.
+			ex: ["myMaster", "otherMaster"]		Two NickServ-auths are whitelisted, etc.
+
+		"masterTimeout": 600,
+			(integer)
+			Max inactivity, in seconds, before a master nick is unregistered with the bot.
+
+		"freeleechDir": "/path/to/my/dir",
+			(string)
+			Absolute path to the destination where freeleech-torrents should be saved.
+	}
+},
+
+
+/*
+ * ------------
+ * BTN settings
+ * ------------
+ */
+
+"btn": {
+	"apikey": "my_apikey"
+		(string)
+		API-key on BTN
+
+	/*
+	 * IRC-watch module settings
+	 */
+	"ircwatch": {
+		"enabled": false,
+			(boolean)
+			Enables this module.
+
+		"allowForeign": false,
+			(boolean)
+			Should we notify SickBeard when there is a foreign release for an English show?
+
+		"server": "irc.broadcasthe.net",
+			(string)
+			IRC hostname.
+
+		"port": 6667,
+			(integer)
+			IRC port.
+
+		"secure": false,
+			(boolean)
+			Use TLS when connecting to IRC. Needs to be true if you're using the IRC
+			SSL-port.
+
+		"nickname": "my_botnick",
+			(string)
+			IRC nickname. This also needs to be the NickServ-username.
+
+		"channel": "#BTN-WhatAuto",
+			(string)
+			IRC channel to listen for announces. Don't change this.
+
+		"nickservPassword": "my_password",
+			(string)
+			NickServ password.
+
+		"masterAuths": [""],
+			(array)
+			Whitelist of NickServ-auths who are allowed to execute commands on the bot.
+			ex: ["myMaster"]					NickServ-auth "myMaster" is whitelisted.
+			ex: ["myMaster", "otherMaster"]		Two NickServ-auths are whitelisted, etc.
+
+		"masterTimeout": 600
+			(integer)
+			Max inactivity, in seconds, before a master nick is unregistered with the bot.
+	}
+},
+
+
+/*
+ * --------------------
+ * CouchPotato settings
+ * --------------------
+ */
+
+"cp": {
+	"url": "http://<hostname>:<port>",
+		(string)
+		CouchPotato URL.
+
+	"apikey": "my_apikey"
+		(string)
+		CouchPotato API-key.
+},
+
+
+/*
+ * ------------------
+ * SickBeard settings
+ * ------------------
+ */
+
+"sb": {
+	"ttl": 60,
+		(integer)
+		Time-To-Live for in-application SickBeard-cache.
+
+	"url": "http://<sickbeard>:<port>",
+		(string)
+		SickBeard API-URL.
+
+	"apikey": "my_apikey",
+		(string)
+		SickBeard API-key.
+
+	"username": "my_username",
+		(string)
+		SickBeard username. Needed for running backlog-scans on shows, since it's not
+		available from the API yet.
+
+	"password": "my_password"
+		(string)
+		SickBeard password. Needed for running backlog-scans on shows, since it's not
+		available from the API yet.
+}
+
+
+/*
+ * -------------
+ * HTTP settings
+ * -------------
+ */
+
+"http": {
+	"timeout": 30,
+		(integer)
+		HTTP request timeout in seconds
+
+	"ignoreInvalidSSL": false
+		(boolean)
+		Ignores certificate-warnings on HTTPS-requests. If you're running SickBeard or
+		CouchPotato using a self-signed cert, you want this.
+}

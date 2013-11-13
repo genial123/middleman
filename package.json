@@ -1,0 +1,16 @@
+{
+	"name": "middleman",
+	"description": "middleman",
+	"author": "genial",
+	"version": "0.2.0",
+	"dependencies": {
+		"async": ">= 0.2.9",
+		"stdio": ">= 0.1.2",
+		"request": ">= 2.22.0",
+		"btn-api": ">= 0.1.0",
+		"forever-monitor": ">= 1.2.2"
+	},
+	"engine": "node >= 0.8.0",
+	"main": "server.js",
+	"private": true
+}
