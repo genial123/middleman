@@ -107,7 +107,7 @@
 
 		"nickname": "my_botnick",
 			(string)
-			IRC nickname. This also needs to be the NickServ-username.
+			IRC nickname. Needs to be registered with NickServ or grouped.
 
 		"channel": "#ptp-announce",
 			(string)
@@ -172,7 +172,7 @@
 
 		"nickname": "my_botnick",
 			(string)
-			IRC nickname. This also needs to be the NickServ-username.
+			IRC nickname. Needs to be registered with NickServ or grouped.
 
 		"channel": "#BTN-WhatAuto",
 			(string)
