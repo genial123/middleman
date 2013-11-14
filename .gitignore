@@ -1,5 +1,1 @@
 /nbproject/*
-/node_modules/*
-!/node_modules/winston
-!/node_modules/girc
-!/node_modules/ministore
