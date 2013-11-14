@@ -60,7 +60,7 @@
 			(boolean)
 			Enables this module.
 
-		"interval": 10,
+		"interval": 15,
 			(integer)
 			The interval, in minutes, to check for deleted snatches.
 
