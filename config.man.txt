@@ -105,6 +105,11 @@
 			Use TLS when connecting to IRC. Needs to be true if you're using the IRC
 			SSL-port.
 
+		"ignoreInvalidCert": false,
+			(boolean)
+			If the IRC-server has an invalid certificate when connecting securely,
+			setting this options to true will ignore that and connect anyway.
+
 		"nickname": "my_botnick",
 			(string)
 			IRC nickname. Needs to be registered with NickServ or grouped.
@@ -169,6 +174,11 @@
 			(boolean)
 			Use TLS when connecting to IRC. Needs to be true if you're using the IRC
 			SSL-port.
+
+		"ignoreInvalidCert": false,
+			(boolean)
+			If the IRC-server has an invalid certificate when connecting securely,
+			setting this options to true will ignore that and connect anyway.
 
 		"nickname": "my_botnick",
 			(string)
