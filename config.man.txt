@@ -21,7 +21,7 @@
 		Show raw output from the IRC-module in console. Raw messages from the IRC-module
 		will never appear in logfiles, regardless of this setting.
 
-	"cleanLogs": 10,
+	"cleanLogs": 10
 		(integer)
 		How old, in days, a logfile gets to age before getting purged. Purge occurs
 		every 24 hours, the first purge being 24 hours after application startup.
@@ -132,7 +132,7 @@
 			(integer)
 			Max inactivity, in seconds, before a master nick is unregistered with the bot.
 
-		"freeleechDir": "/path/to/my/dir",
+		"freeleechDir": "/path/to/my/dir"
 			(string)
 			Absolute path to the destination where freeleech-torrents should be saved.
 	}
