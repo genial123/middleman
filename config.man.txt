@@ -85,6 +85,11 @@
 			(boolean)
 			Enables this module.
 
+		"delay": 5,
+			(integer)
+			The delay, in seconds, to wait between getting a matching announce
+			and sending the download-command to CouchPotato.
+
 		"maxage": 1,
 			(integer)
 			Maximum age, in years, for an announce to be picked up and checked. If you
@@ -157,6 +162,11 @@
 		"enabled": false,
 			(boolean)
 			Enables this module.
+
+		"delay": 5,
+			(integer)
+			The delay, in seconds, to wait between getting a matching announce
+			and sending the download-command to SickBeard.
 
 		"allowForeign": false,
 			(boolean)
