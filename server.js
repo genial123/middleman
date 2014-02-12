@@ -20,7 +20,7 @@ init.init(function(err) {
 	if (env.platform == 'win') return require('./lib/dispatch');
 
 	var forever = require('forever-monitor');
-	var config = require('./lib/utils/config');
+	var config = require('./lib/util/config');
 
 	function createChild() {
 		var child = new (forever.Monitor)('lib/dispatch.js', {
