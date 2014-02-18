@@ -135,6 +135,9 @@
 		"freeleechDir": "/path/to/my/dir"
 			(string)
 			Absolute path to the destination where freeleech-torrents should be saved.
+			ex: "/path/to/my/unix/style/dir"	UNIX-style path
+			ex: "C:/my/windows/style/dir"		Windows-style path
+			ex: "C:\\double\\backslash\\dir"	Backlashes needs to be escaped
 	}
 },
 
