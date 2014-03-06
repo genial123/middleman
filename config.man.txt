@@ -92,31 +92,18 @@
 			for old releases. Does not apply to freeleech-torrents when freeleech-mode
 			is enabled.
 
-		"server": "irc.passthepopcorn.me",
-			(string)
-			IRC hostname.
-
-		"port": 6667,
-			(integer)
-			IRC port.
-
-		"secure": false,
+		"useIrcSSL": false,
 			(boolean)
-			Use TLS when connecting to IRC. Needs to be true if you're using the IRC
-			SSL-port.
+			Enables TLS and connects to the IRC server using the SSL port.
 
-		"ignoreInvalidCert": false,
+		"ignoreInvalidIrcSSL": false,
 			(boolean)
-			If the IRC-server has an invalid certificate when connecting securely,
+			If the IRC server has an invalid SSL certificate when connecting securely,
 			setting this options to true will ignore that and connect anyway.
 
 		"nickname": "my_botnick",
 			(string)
 			IRC nickname. Needs to be registered with NickServ or grouped.
-
-		"channel": "#ptp-announce",
-			(string)
-			IRC channel to listen for announces. Don't change this.
 
 		"nickservPassword": "my_password",
 			(string)
@@ -165,31 +152,18 @@
 			(boolean)
 			Should we notify SickBeard when there is a foreign release for an English show?
 
-		"server": "irc.broadcasthe.net",
-			(string)
-			IRC hostname.
-
-		"port": 6667,
-			(integer)
-			IRC port.
-
-		"secure": false,
+		"useIrcSSL": false,
 			(boolean)
-			Use TLS when connecting to IRC. Needs to be true if you're using the IRC
-			SSL-port.
+			Enables TLS and connects to the IRC server using the SSL port.
 
-		"ignoreInvalidCert": false,
+		"ignoreInvalidIrcSSL": false,
 			(boolean)
-			If the IRC-server has an invalid certificate when connecting securely,
+			If the IRC server has an invalid SSL certificate when connecting securely,
 			setting this options to true will ignore that and connect anyway.
 
 		"nickname": "my_botnick",
 			(string)
 			IRC nickname. Needs to be registered with NickServ or grouped.
-
-		"channel": "#BTN-WhatAuto",
-			(string)
-			IRC channel to listen for announces. Don't change this.
 
 		"nickservPassword": "my_password",
 			(string)
@@ -269,6 +243,6 @@
 
 	"ignoreInvalidSSL": false
 		(boolean)
-		Ignores certificate-warnings on HTTPS-requests. If you're running SickBeard or
+		Ignores certificate warnings on HTTPS-requests. If you're running SickBeard or
 		CouchPotato using a self-signed cert, you want this.
 }
