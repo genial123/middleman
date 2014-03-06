@@ -21,10 +21,32 @@
 		Show raw output from the IRC-module in console. Raw messages from the IRC-module
 		will never appear in logfiles, regardless of this setting.
 
-	"cleanLogs": 10
+	"cleanLogs": 10,
 		(integer)
 		How old, in days, a logfile gets to age before getting purged. Purge occurs
 		every 24 hours, the first purge being 24 hours after application startup.
+
+	"hooks": ""
+		(string)
+		Custom script to run hooks after Middleman events. The event will be passed as
+		first argument to the script, and the module will be passed as second argument.
+
+		Examples:
+			Bash:				"/bin/bash /path/to/hook.sh"
+			Node.js:			"/usr/bin/node /path/to/hook.js"
+			Python:				"/usr/bin/python /path/to/hook.py"
+			Batch (Windows):	"C:\\Windows\\System32\\cmd.exe /C C:\\path\\to\\hook.bat"
+
+		Events:
+			connect			Connected to an IRC server
+			disconnect		Disconnected from an IRC server
+			download		Download-command sent to CouchPotato or SickBeard
+			freeleech		Downloaded a freeleech-torrent
+
+		Modules:
+			btnirc
+			ptpirc
+			ptpanti
 },
 
 
@@ -123,8 +145,7 @@
 			(string)
 			Absolute path to the destination where freeleech-torrents should be saved.
 			ex: "/path/to/my/unix/style/dir"	UNIX-style path
-			ex: "C:/my/windows/style/dir"		Windows-style path
-			ex: "C:\\double\\backslash\\dir"	Backlashes needs to be escaped
+			ex: "C:\\my\\windows\\style\\dir"	Windows-style path
 	}
 },
 

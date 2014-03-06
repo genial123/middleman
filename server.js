@@ -11,12 +11,17 @@ var stdio = require('stdio');
 var init = require('./lib/init');
 
 var opts = stdio.getopt({
-	init: {description: 'Initialize application'}
+	init: {description: 'Initialize application'},
+	hook: {description: 'Send a test event to the hook script'}
 });
 
 init.init(function(err) {
 	if (err) return exit(err);
 	if (opts.init) return console.log('Initialized!');
+	if (opts.hook) {
+		var hooks = require('./lib/util/hooks');
+		return hooks.test();
+	}
 	if (env.platform == 'win') return require('./lib/dispatch');
 
 	var forever = require('forever-monitor');
