@@ -1,3 +1,4 @@
+var path = require('path');
 var stdio = require('stdio');
 var forever = require('forever-monitor');
 var env = require('./lib/env');
@@ -19,23 +20,18 @@ init.init(function(err) {
 		return hooks.test();
 	}
 
-	var config = require('./lib/util/config');
-
 	function createChild() {
 		var child = new (forever.Monitor)('lib/dispatch.js', {
-			max: (config.app.forever ? Number.MAX_VALUE : 0),
+			max: Number.MAX_VALUE,
 			command: process.execPath.replace('Program Files', 'Progra~1'),
 			silent: false,
-			options: [],
 			minUptime: 2000,
 			spinSleepTime: 10000,
-			errFile: env.logs+'/forever.debug.log'
+			errFile: path.join(env.logs, 'forever.debug.log')
 		});
 
 		child.on('exit', function() {
-			if (config.app.forever) {
-				createChild();
-			}
+			createChild();
 		});
 
 		child.start();

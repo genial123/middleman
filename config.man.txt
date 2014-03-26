@@ -5,12 +5,6 @@
  */
 
 "app": {
-	"forever": true,
-		(boolean)
-		Puts the application in an endless loop, reviving it from the dead if it crashes.
-		Let's face it, it's gonna crash - should be used in production, not in development.
-		Will be ignored when running in a Windows-environment.
-
 	"logColors": true,
 		(boolean)
 		Use colored loglevels in the log-files. Loglevels will always appear colored in
