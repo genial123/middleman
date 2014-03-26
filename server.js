@@ -1,15 +1,10 @@
+var stdio = require('stdio');
 var forever = require('forever-monitor');
 var env = require('./lib/env');
-
-function exit(m) {
-	console.error('[!] %s', m);
-	process.exit(1);
-}
-
-if (env.user.toLowerCase() == 'root') exit('Script should not be run as root, exiting.');
-
-var stdio = require('stdio');
 var init = require('./lib/init');
+var help = require('./lib/util/helpers');
+
+if (env.user.toLowerCase() == 'root') help.exit('Script should not be run as root, exiting.');
 
 var opts = stdio.getopt({
 	init: {description: 'Initialize application'},
@@ -17,7 +12,7 @@ var opts = stdio.getopt({
 });
 
 init.init(function(err) {
-	if (err) return exit(err);
+	if (err) return help.exit(err);
 	if (opts.init) return console.log('Initialized!');
 	if (opts.hook) {
 		var hooks = require('./lib/util/hooks');
