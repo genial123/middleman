@@ -20,6 +20,17 @@
 		How old, in days, a logfile gets to age before getting purged. Purge occurs
 		every 24 hours, the first purge being 24 hours after application startup.
 
+	"autoUpdate": "patch",
+		(string)
+		Allows Middleman to auto-update itself whenever it finds a new version through Git.
+		Scans for new versions occur every 24 hours, and auto-updating will restart the app.
+
+		Values:
+			null				Turns off auto-update feature
+			"patch" (default)	Auto-updates only on new patch releases (ex: 1.3.1 -> 1.3.2)
+			"minor"				Auto-updates on new patch and minor releases (ex: 1.3.4 -> 1.4.2)
+			"major"				Auto-updates on all new releases (ex: 1.3.6 -> 2.0.0)
+
 	"hooks": ""
 		(string)
 		Custom script to run hooks after Middleman events. The event will be passed as
