@@ -1,3 +1,4 @@
+var forever = require('forever-monitor');
 var env = require('./lib/env');
 
 function exit(m) {
@@ -22,14 +23,13 @@ init.init(function(err) {
 		var hooks = require('./lib/util/hooks');
 		return hooks.test();
 	}
-	if (env.platform == 'win') return require('./lib/dispatch');
 
-	var forever = require('forever-monitor');
 	var config = require('./lib/util/config');
 
 	function createChild() {
 		var child = new (forever.Monitor)('lib/dispatch.js', {
 			max: (config.app.forever ? Number.MAX_VALUE : 0),
+			command: process.execPath.replace('Program Files', 'Progra~1'),
 			silent: false,
 			options: [],
 			minUptime: 2000,
