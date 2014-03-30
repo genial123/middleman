@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Middleman</title>
+		<meta charset="UTF-8">
+		<script type="text/javascript" src="jquery.min.js"></script>
+		<script type="text/javascript">
+			
+			String.prototype.replace_array = function(find, replace) {
+				var result = this;
+				for (var i = 0; i < find.length; i++) {
+					var regex = new RegExp(find[i], 'g');
+					result = result.replace(regex, replace[i]);
+				}
+				return result;
+			};
+
+			var colors = {
+				console: [
+					'\\[1m', '\\[22m', '\\[3m', '\\[23m', '\\[4m', '\\[24m', '\\[7m', '\\[27m', '\\[9m',
+					'\\[29m', '\\[39m', '\\[37m', '\\[90m', '\\[30m', '\\[34m', '\\[36m', '\\[32m', '\\[35m',
+					'\\[31m', '\\[33m', '\\[49m', '\\[47m', '\\[49;5;8m', '\\[40m', '\\[44m', '\\[46m',
+					'\\[42m', '\\[45m', '\\[41m', '\\[43m'
+				],
+				html: [
+					'<b>', '</b>', '<i>', '</i>', '<u>', '</u>', '<span style="background-color:black;color:white;">',
+					'</span>', '<del>', '</del>', '</span>', '<span style="color:white;">', '<span style="color:gray;">',
+					'<span style="color:black;">', '<span style="color:blue;">', '<span style="color:cyan;">',
+					'<span style="color:green;">', '<span style="color:magenta;">', '<span style="color:red;">',
+					'<span style="color:yellow;">', '</span>', '<span style="background-color:white;">',
+					'<span style="background-color:gray;">', '<span style="background-color:black;">',
+					'<span style="background-color:blue;">', '<span style="background-color:cyan;">',
+					'<span style="background-color:green;">', '<span style="background-color:magenta;">',
+					'<span style="background-color:red;">', '<span style="background-color:yellow;">'
+				]
+			};
+
+			var gui = require('nw.gui');
+			var spawn = require('child_process').spawn;
+			var util = require('util');
+			var path = require('path');
+
+
+			/*
+			 * Window stuff
+			 */
+			var win = gui.Window.get();
+			var pwd = path.normalize(gui.App.argv[0]);
+			var tray;
+
+			win.on('minimize', function() {
+				this.hide();
+
+				tray = new gui.Tray({
+					title: 'Middleman',
+					icon: 'nodejs.png'
+				});
+				tray.tooltip = 'Middleman';
+
+				tray.on('click', function() {
+					win.show();
+					this.remove();
+					tray = null;
+					win.focus();
+				});
+			});
+			
+
+			/*
+			 * Middleman
+			 */
+			function logAppend(m) {
+				var line = m.toString().replace_array(colors.console, colors.html).replace(/\r\n/g, "\n").replace(/\n/g, "<br />");
+				$('#log #content').append(line);
+				cleanLines();
+				$('#log').scrollTop($('#log #content').height());
+			}
+
+			function cleanLines() {
+				var max = 500;
+				var count = $('#log #content br').length;
+				if (count > max) {
+					var diff = count-max;
+					$('#log #content').contents().slice(0, (diff*2)).remove();
+				}
+			}
+
+			function spawnMiddleman() {
+				var child = spawn('node', [path.join(pwd, 'server.js')]);
+				child.stdout.on('data', logAppend);
+				child.stderr.on('data', logAppend);
+			}
+
+
+			/*
+			 * OnReady
+			 */
+			$(function() {
+				spawnMiddleman();
+			});
+			
+		</script>
+
+		<style>
+			html, body {
+				background: #131313;
+				height: 100%;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			body {
+				font-family: monospace;
+				font-size: 11px;
+				color: #eeeeee;
+			}
+			#log {
+				overflow: hidden;
+				overflow-y: scroll;
+				padding: 8px;
+				width: 100%;
+				height: 100%;
+				box-sizing: border-box;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="log">
+			<div id="content"></div>
+		</div>
+	</body>
+</html>
