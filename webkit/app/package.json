@@ -1,0 +1,12 @@
+{
+	"name": "middleman-wk",
+	"main": "index.html",
+	"window": {
+		"icon": "nodejs.png",
+		"toolbar": false,
+		"frame": true,
+		"width": 980,
+		"height": 650,
+		"show": true
+	}
+}
