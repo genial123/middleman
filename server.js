@@ -1,45 +1,107 @@
-var env = require('./lib/env');
+var stdio = require('stdio');
+var fs = require('fs');
+var path = require('path');
+var forever = require('forever-monitor');
+var daemonize = require('daemonize2');
 
-function exit(m) {
-	console.error('[!] %s', m);
-	process.exit(1);
+/*
+ * Args + env
+ */
+var opts = stdio.getopt({
+	init: {description: 'Initialize application'},
+	hook: {description: 'Send a test event to the hook script'},
+	daemon: {description: 'Start Middleman as a *NIX daemon'},
+	datadir: {args: 1, description: 'Specify data directory for Middleman'},
+	pidfile: {args: 1, description: 'Specify pid file for Middleman daemon'}
+});
+
+if (opts.datadir) process.env._datadir = opts.datadir;
+if (opts.pidfile) process.env._pidfile = opts.pidfile;
+
+/*
+ * Post-env
+ */
+var env = require('./lib/env');
+var init = require('./lib/init');
+var help = require('./lib/util/helpers');
+
+if (!env.uid) help.exit('Script should not be run as root, exiting.');
+
+/*
+ * Daemonize
+ */
+if (opts.daemon && !process.env._daemon) {
+	if (!opts.datadir) help.exit('Need a data directory if I\'m gonna daemonize myself');
+	if (!opts.pidfile) help.exit('Need a pid file if I\'m gonna daemonize myself');
+
+	process.env._daemon = true;
+	daemonize.setup({
+		main: path.join(__dirname, 'server.js'),
+		name: 'middleman',
+		pidfile: opts.pidfile
+	}).start();
 }
 
-if (env.user.toLowerCase() == 'root') exit('Script should not be run as root, exiting.');
+else {
+	/*
+	 * Init application
+	 */
+	init.init(function(err) {
+		if (err) return help.exit(err);
+		if (opts.init) return console.log('Initialized!');
+		if (opts.hook) {
+			var hooks = require('./lib/util/hooks');
+			return hooks.test();
+		}
 
-var stdio = require('stdio');
-var init = require('./lib/init');
+		/*
+		 * Setup forever-monitor
+		 */
+		var child = null;
+		var killed = false;
 
-var opts = stdio.getopt({
-	init: {description: 'Initialize application'}
-});
+		function createChild() {
+			child = new (forever.Monitor)(path.join(__dirname, 'lib/dispatch.js'), {
+				max: Number.MAX_VALUE,
+				command: process.execPath.replace('Program Files', 'Progra~1'),
+				silent: false,
+				minUptime: 2000,
+				spinSleepTime: 10000,
+				errFile: path.join(env.logs, 'forever.debug.log')
+			});
 
-init.init(function(err) {
-	if (err) return exit(err);
-	if (opts.init) return console.log('Initialized!');
-	if (env.platform == 'win') return require('./lib/dispatch');
+			child.on('exit', function() {
+				if (!killed) createChild();
+			});
 
-	var forever = require('forever-monitor');
-	var config = require('./lib/util/config');
+			child.start();
+		}
 
-	function createChild() {
-		var child = new (forever.Monitor)('lib/dispatch.js', {
-			max: (config.app.forever ? Number.MAX_VALUE : 0),
-			silent: false,
-			options: [],
-			minUptime: 2000,
-			spinSleepTime: 10000,
-			errFile: env.logs+'/forever.debug.log'
-		});
+		/*
+		 * Cleanup on termination
+		 * Windows hates this
+		 */
+		if (env.platform != 'win') {
+			process.on('SIGINT', function() {
+				killed = true;
+				if (child) child.stop();
+			})
+			.on('SIGTERM', function() {
+				killed = true;
+				if (child) child.stop();
 
-		child.on('exit', function() {
-			if (config.app.forever) {
-				createChild();
-			}
-		});
+				if (!opts.pidfile) return;
+				fs.exists(opts.pidfile, function(pex) {
+					if (!pex) return;
 
-		child.start();
-	}
+					fs.unlinkSync(opts.pidfile);
+				});
+			});
+		}
 
-	createChild();
-});
+		/*
+		 * Run child
+		 */
+		createChild();
+	});
+}

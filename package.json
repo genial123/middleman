@@ -1,14 +1,15 @@
 {
 	"name": "middleman",
-	"description": "middleman",
+	"description": "Middleman",
 	"author": "genial",
-	"version": "0.2.0",
+	"version": "0.4.0",
 	"dependencies": {
-		"async": ">= 0.2.9",
-		"stdio": ">= 0.1.2",
-		"request": ">= 2.22.0",
-		"btn-api": ">= 0.1.0",
-		"forever-monitor": ">= 1.2.2"
+		"async": "0.2.x",
+		"btn-api": "0.1.x",
+		"daemonize2": "0.4.x",
+		"forever-monitor": "1.2.x",
+		"request": "2.27.x",
+		"stdio": "0.1.x"
 	},
 	"engine": "node >= 0.8.0",
 	"main": "server.js",

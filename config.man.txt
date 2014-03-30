@@ -5,12 +5,6 @@
  */
 
 "app": {
-	"forever": true,
-		(boolean)
-		Puts the application in an endless loop, reviving it from the dead if it crashes.
-		Let's face it, it's gonna crash - should be used in production, not in development.
-		Will be ignored when running in a Windows-environment.
-
 	"logColors": true,
 		(boolean)
 		Use colored loglevels in the log-files. Loglevels will always appear colored in
@@ -21,10 +15,43 @@
 		Show raw output from the IRC-module in console. Raw messages from the IRC-module
 		will never appear in logfiles, regardless of this setting.
 
-	"cleanLogs": 10
+	"cleanLogs": 10,
 		(integer)
 		How old, in days, a logfile gets to age before getting purged. Purge occurs
 		every 24 hours, the first purge being 24 hours after application startup.
+
+	"autoUpdate": "patch",
+		(string)
+		Allows Middleman to auto-update itself whenever it finds a new version through Git.
+		Scans for new versions occur every 24 hours, and auto-updating will restart the app.
+
+		Values:
+			null				Turns off auto-update feature
+			"patch" (default)	Auto-updates only on new patch releases (ex: 1.3.1 -> 1.3.2)
+			"minor"				Auto-updates on new patch and minor releases (ex: 1.3.4 -> 1.4.2)
+			"major"				Auto-updates on all new releases (ex: 1.3.6 -> 2.0.0)
+
+	"hooks": ""
+		(string)
+		Custom script to run hooks after Middleman events. The event will be passed as
+		first argument to the script, and the module will be passed as second argument.
+
+		Examples:
+			Bash:				"/bin/bash /path/to/hook.sh"
+			Node.js:			"/usr/bin/node /path/to/hook.js"
+			Python:				"/usr/bin/python /path/to/hook.py"
+			Batch (Windows):	"C:\\Windows\\System32\\cmd.exe /C C:\\path\\to\\hook.bat"
+
+		Events:
+			connect			Connected to an IRC server
+			disconnect		Disconnected from an IRC server
+			download		Download-command sent to CouchPotato or SickBeard
+			freeleech		Downloaded a freeleech-torrent
+
+		Modules:
+			btnirc
+			ptpirc
+			ptpanti
 },
 
 
@@ -92,31 +119,18 @@
 			for old releases. Does not apply to freeleech-torrents when freeleech-mode
 			is enabled.
 
-		"server": "irc.passthepopcorn.me",
-			(string)
-			IRC hostname.
-
-		"port": 6667,
-			(integer)
-			IRC port.
-
-		"secure": false,
+		"useIrcSSL": false,
 			(boolean)
-			Use TLS when connecting to IRC. Needs to be true if you're using the IRC
-			SSL-port.
+			Enables TLS and connects to the IRC server using the SSL port.
 
-		"ignoreInvalidCert": false,
+		"ignoreInvalidIrcSSL": false,
 			(boolean)
-			If the IRC-server has an invalid certificate when connecting securely,
+			If the IRC server has an invalid SSL certificate when connecting securely,
 			setting this options to true will ignore that and connect anyway.
 
 		"nickname": "my_botnick",
 			(string)
 			IRC nickname. Needs to be registered with NickServ or grouped.
-
-		"channel": "#ptp-announce",
-			(string)
-			IRC channel to listen for announces. Don't change this.
 
 		"nickservPassword": "my_password",
 			(string)
@@ -136,8 +150,7 @@
 			(string)
 			Absolute path to the destination where freeleech-torrents should be saved.
 			ex: "/path/to/my/unix/style/dir"	UNIX-style path
-			ex: "C:/my/windows/style/dir"		Windows-style path
-			ex: "C:\\double\\backslash\\dir"	Backlashes needs to be escaped
+			ex: "C:\\my\\windows\\style\\dir"	Windows-style path
 	}
 },
 
@@ -165,31 +178,18 @@
 			(boolean)
 			Should we notify SickBeard when there is a foreign release for an English show?
 
-		"server": "irc.broadcasthe.net",
-			(string)
-			IRC hostname.
-
-		"port": 6667,
-			(integer)
-			IRC port.
-
-		"secure": false,
+		"useIrcSSL": false,
 			(boolean)
-			Use TLS when connecting to IRC. Needs to be true if you're using the IRC
-			SSL-port.
+			Enables TLS and connects to the IRC server using the SSL port.
 
-		"ignoreInvalidCert": false,
+		"ignoreInvalidIrcSSL": false,
 			(boolean)
-			If the IRC-server has an invalid certificate when connecting securely,
+			If the IRC server has an invalid SSL certificate when connecting securely,
 			setting this options to true will ignore that and connect anyway.
 
 		"nickname": "my_botnick",
 			(string)
 			IRC nickname. Needs to be registered with NickServ or grouped.
-
-		"channel": "#BTN-WhatAuto",
-			(string)
-			IRC channel to listen for announces. Don't change this.
 
 		"nickservPassword": "my_password",
 			(string)
@@ -269,6 +269,6 @@
 
 	"ignoreInvalidSSL": false
 		(boolean)
-		Ignores certificate-warnings on HTTPS-requests. If you're running SickBeard or
+		Ignores certificate warnings on HTTPS-requests. If you're running SickBeard or
 		CouchPotato using a self-signed cert, you want this.
 }

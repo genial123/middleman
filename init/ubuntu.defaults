@@ -1,0 +1,17 @@
+#
+# Change these
+#
+
+MM_USER=your_username
+MM_HOME=/home/your_username/middleman
+MM_DATA=/home/your_username/.middleman
+
+
+#
+# Change these if you know what you're doing
+#
+
+#MM_PIDFILE=
+#NODE_BIN=
+#MM_OPTS=
+#SSD_OPTS=
