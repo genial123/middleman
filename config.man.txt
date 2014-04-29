@@ -128,9 +128,10 @@
 			If the IRC server has an invalid SSL certificate when connecting securely,
 			setting this options to true will ignore that and connect anyway.
 
-		"nickname": "my_botnick",
+		"nickname": "my_nick|AutoDL",
 			(string)
-			IRC nickname. Needs to be registered with NickServ or grouped.
+			IRC nickname. Should end in "|AutoDL" and needs to be registered with
+			NickServ or grouped with another NickServ account.
 
 		"nickservPassword": "my_password",
 			(string)
@@ -187,9 +188,10 @@
 			If the IRC server has an invalid SSL certificate when connecting securely,
 			setting this options to true will ignore that and connect anyway.
 
-		"nickname": "my_botnick",
+		"nickname": "my_nick|AutoDL",
 			(string)
-			IRC nickname. Needs to be registered with NickServ or grouped.
+			IRC nickname. Should end in "|AutoDL" and needs to be registered with
+			NickServ or grouped with another NickServ account.
 
 		"nickservPassword": "my_password",
 			(string)
