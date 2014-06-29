@@ -58,27 +58,31 @@ If you didn't install Git you need to manually download the newer zip/tarball fr
 
 ### As a Debian/Ubuntu service
 
-1. Standing in the Middleman application directory, copy the init.d-script that comes with Middleman and make it executable
+Standing in the Middleman application directory, copy the init.d-script that comes with Middleman and make it executable
 ```bash
 sudo cp init/ubuntu /etc/init.d/middleman
 chmod +x /etc/init.d/middleman
 ```
-2. Copy the defaults-file, this is the file you'll use to override the default settings in the init.d-script
+
+Copy the defaults-file, this is the file you'll use to override the default settings in the init.d-script
 ```bash
 sudo cp init/ubuntu.defaults /etc/default/middleman
 ```
-3. Edit the defaults file you just copied
+
+Edit the defaults file you just copied
 ```bash
 sudo nano /etc/default/middleman
 ```
-  * MM_USER is the username you want to run Middleman as
-  * MM_HOME is the path to the Middleman application
-  * MM_DATA is the path to the Middleman data directory
-4. Install the service
+* MM_USER is the username you want to run Middleman as
+* MM_HOME is the path to the Middleman application
+* MM_DATA is the path to the Middleman data directory
+
+Install the service
 ```bash
 sudo update-rc.d middleman defaults
 ```
-5. Done! You can now start it as any other service by:
+
+Done! You can now start it as any other service by:
 ```bash
 sudo /etc/init.d/middleman start
 ```
