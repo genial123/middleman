@@ -61,7 +61,7 @@ If you didn't install Git you need to manually download the newer zip/tarball fr
 Standing in the Middleman application directory, copy the init.d-script that comes with Middleman and make it executable
 ```bash
 sudo cp init/ubuntu /etc/init.d/middleman
-chmod +x /etc/init.d/middleman
+sudo chmod +x /etc/init.d/middleman
 ```
 
 Copy the defaults-file, this is the file you'll use to override the default settings in the init.d-script
@@ -90,4 +90,4 @@ sudo /etc/init.d/middleman start
 
 ### As a Windows "service"
 
-Make a shortcut to __webkit/windows/middleman.vbs__ in your Startup directory.
+Create a shortcut to __webkit/windows/middleman.vbs__ in your Startup directory.
