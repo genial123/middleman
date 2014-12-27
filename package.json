@@ -2,7 +2,7 @@
 	"name": "middleman",
 	"description": "Middleman",
 	"author": "genial",
-	"version": "0.5.2",
+	"version": "0.5.3",
 	"dependencies": {
 		"async": "0.2.x",
 		"btn-api": "0.1.x",
