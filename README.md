@@ -23,7 +23,7 @@ The "--init" command just created a config-file you'll need to edit. All config-
 
 __Note:__ Be careful with the syntax while editing the config. If Middleman can't parse the config as JSON, it will refuse to run.
 
-__Note:__ Only the PTP-modules require CouchPotato and only the BTN-module requires SickBeard. If you for example don't enable the BTN-module, you don't need to fill out the SickBeard-config.
+__Note:__ Only the PTP-modules require CouchPotato and only the BTN-module requires SickRage. If you for example don't enable the BTN-module, you don't need to fill out the SickRage-config.
 
 
 ### Fingers crossed

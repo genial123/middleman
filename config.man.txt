@@ -45,7 +45,7 @@
 		Events:
 			connect			Connected to an IRC server
 			disconnect		Disconnected from an IRC server
-			download		Download-command sent to CouchPotato or SickBeard
+			download		Download-command sent to CouchPotato or SickRage
 			freeleech		Downloaded a freeleech-torrent
 
 		Modules:
@@ -177,7 +177,7 @@
 
 		"allowForeign": false,
 			(boolean)
-			Should we notify SickBeard when there is a foreign release for an English show?
+			Should we notify SickRage when there is a foreign release for an English show?
 
 		"useIrcSSL": false,
 			(boolean)
@@ -229,31 +229,31 @@
 
 /*
  * ------------------
- * SickBeard settings
+ * SickRage settings
  * ------------------
  */
 
 "sb": {
 	"ttl": 60,
 		(integer)
-		Time-To-Live for in-application SickBeard-cache.
+		Time-To-Live for in-application SickRage-cache.
 
-	"url": "http://<sickbeard>:<port>",
+	"url": "http://<sickrage>:<port>",
 		(string)
-		SickBeard API-URL.
+		SickRage API-URL.
 
 	"apikey": "my_apikey",
 		(string)
-		SickBeard API-key.
+		SickRage API-key.
 
 	"username": "my_username",
 		(string)
-		SickBeard username. Needed for running backlog-scans on shows, since it's not
+		SickRage username. Needed for running backlog-scans on shows, since it's not
 		available from the API yet.
 
 	"password": "my_password"
 		(string)
-		SickBeard password. Needed for running backlog-scans on shows, since it's not
+		SickRage password. Needed for running backlog-scans on shows, since it's not
 		available from the API yet.
 }
 
@@ -271,6 +271,6 @@
 
 	"ignoreInvalidSSL": false
 		(boolean)
-		Ignores certificate warnings on HTTPS-requests. If you're running SickBeard or
+		Ignores certificate warnings on HTTPS-requests. If you're running SickRage or
 		CouchPotato using a self-signed cert, you want this.
 }
